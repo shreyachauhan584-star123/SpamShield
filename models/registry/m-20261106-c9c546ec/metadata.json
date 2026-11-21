@@ -1,0 +1,12 @@
+{
+  "model_id": "m-20261106-c9c546ec",
+  "dataset_version": "dsv-fc8d33ce99",
+  "selected": "logistic_regression|word_1_3",
+  "seed": 42,
+  "trained_at": "2026-11-06T07:28:22+00:00",
+  "versions": {
+    "python": "3.12.3",
+    "scikit-learn": "1.8.0",
+    "git_commit": "5527b18"
+  }
+}

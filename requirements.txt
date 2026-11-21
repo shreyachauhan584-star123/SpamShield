@@ -1,0 +1,12 @@
+# GramSuraksha AI V2 - core dependencies (developed/tested with Python 3.12; written for Python 3.11+)
+streamlit>=1.40,<2          # UI (st.navigation, st.audio_input)
+scikit-learn>=1.5           # models, calibration, group splits
+scipy>=1.11                 # near-duplicate clustering (also a scikit-learn dependency)
+pandas>=2.1
+numpy>=1.26
+matplotlib>=3.8             # staff-only model insights charts
+joblib>=1.3
+Pillow>=10.0                # screenshot validation/preprocessing
+pytesseract>=0.3.10         # OCR wrapper (needs the Tesseract program installed; see README 'OCR setup')
+gTTS>=2.5                   # optional server-side audio fallback (needs internet); imported lazily
+pytest>=8.0                 # tests

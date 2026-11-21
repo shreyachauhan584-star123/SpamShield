@@ -1,0 +1,92 @@
+{
+  "dataset_version": "dsv-fc8d33ce99",
+  "created_at": "2026-11-07T06:15:41+00:00",
+  "removed_during_cleaning": {
+    "invalid_or_empty": 0,
+    "conflicting_duplicates": 0,
+    "duplicates": 0
+  },
+  "stats": {
+    "binary_distribution": {
+      "legitimate": 78,
+      "flagged": 127
+    },
+    "imbalance_ratio": 1.63,
+    "imbalanced": false,
+    "provenance": {
+      "synthetic": 205
+    },
+    "rows": 205,
+    "class_distribution": {
+      "fraud": 83,
+      "legitimate": 78,
+      "promotional": 24,
+      "suspicious": 20
+    },
+    "duplicate_messages": 0,
+    "missing_values": 0,
+    "message_length": {
+      "min": 29,
+      "mean": 75.90243902439025,
+      "max": 138
+    },
+    "language_distribution": {
+      "en": 110,
+      "hinglish": 50,
+      "hi": 43,
+      "mixed": 2
+    }
+  },
+  "datasets_used": {
+    "synthetic-demo-v1": "synthetic-demo-v1@65f77172",
+    "synthetic-hi-hinglish-v2": "synthetic-hi-hinglish-v2@0964008d"
+  },
+  "split": {
+    "evaluation_status": "preliminary_synthetic_only",
+    "evaluation_note": "PRELIMINARY: not enough real/verified data, so validation/test are drawn from the same (synthetic-dominated) pool. Treat metrics as a pipeline check, not as evidence of real-world accuracy.",
+    "near_duplicate_threshold": 0.9,
+    "seed": 42,
+    "near_duplicate_clusters_with_multiple_messages": 0,
+    "group_overlap_between_splits": {
+      "train/validation": 0,
+      "train/test": 0,
+      "validation/test": 0
+    },
+    "sizes": {
+      "train": 123,
+      "validation": 41,
+      "test": 41
+    },
+    "provenance_counts": {
+      "train": {
+        "synthetic": 123
+      },
+      "validation": {
+        "synthetic": 41
+      },
+      "test": {
+        "synthetic": 41
+      }
+    }
+  },
+  "warnings": [
+    "PRELIMINARY: not enough real/verified data, so validation/test are drawn from the same (synthetic-dominated) pool. Treat metrics as a pipeline check, not as evidence of real-world accuracy."
+  ],
+  "files": {
+    "train": {
+      "path": "data\\train\\train.csv",
+      "rows": 123,
+      "sha256": "ac1f6b3e89e42af009739ab5be02005a8292dbcc0ea9fb53734678410af86d64"
+    },
+    "validation": {
+      "path": "data\\validation\\validation.csv",
+      "rows": 41,
+      "sha256": "81f640e702c47e598c49b8b19d1dae9bca65fc13b4ba1d7ff29c262bf0a5fa63"
+    },
+    "test": {
+      "path": "data\\test\\test.csv",
+      "rows": 41,
+      "sha256": "3f07fa16e429fab02b88daa035e4c85bfb32c3520953a54d4de6db518283cdf8"
+    }
+  }
+}

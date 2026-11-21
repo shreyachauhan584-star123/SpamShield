@@ -1,0 +1,45 @@
+{
+  "active": "m-20261107-c9c546ec",
+  "models": [
+    {
+      "model_id": "m-20261105-3deec424",
+      "created_at": "2026-11-05T04:33:50+00:00",
+      "dataset_version": "dsv-e8196e1b34",
+      "selected": "logistic_regression|word+char",
+      "evaluation_status": "preliminary_synthetic_only",
+      "validation_pr_auc": 0.9894373626373627,
+      "validation_f2": 0.9448818897637795,
+      "calibration_status": "preliminary_small_sample"
+    },
+    {
+      "model_id": "m-20261105-c9c546ec",
+      "created_at": "2026-11-05T09:53:54+00:00",
+      "dataset_version": "dsv-fc8d33ce99",
+      "selected": "logistic_regression|word_1_3",
+      "evaluation_status": "preliminary_synthetic_only",
+      "validation_pr_auc": 0.987864044168392,
+      "validation_f2": 0.9765625,
+      "calibration_status": "preliminary_small_sample"
+    },
+    {
+      "model_id": "m-20261106-c9c546ec",
+      "created_at": "2026-11-06T07:28:22+00:00",
+      "dataset_version": "dsv-fc8d33ce99",
+      "selected": "logistic_regression|word_1_3",
+      "evaluation_status": "preliminary_synthetic_only",
+      "validation_pr_auc": 0.987864044168392,
+      "validation_f2": 0.9765625,
+      "calibration_status": "preliminary_small_sample"
+    },
+    {
+      "model_id": "m-20261107-c9c546ec",
+      "created_at": "2026-11-07T06:16:07+00:00",
+      "dataset_version": "dsv-fc8d33ce99",
+      "selected": "logistic_regression|word_1_3",
+      "evaluation_status": "preliminary_synthetic_only",
+      "validation_pr_auc": 0.987864044168392,
+      "validation_f2": 0.9765625,
+      "calibration_status": "preliminary_small_sample"
+    }
+  ]
+}

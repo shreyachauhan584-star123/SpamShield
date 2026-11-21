@@ -1,0 +1,12 @@
+Extract the contents of your fine-tuned MuRIL checkpoint directly into this folder.
+
+Expected minimum files (extensions may be hidden in Windows Explorer):
+  config.json
+  model.safetensors
+  tokenizer.json (or vocab.txt / SentencePiece model)
+  tokenizer_config.json
+  special_tokens_map.json (recommended)
+
+Do not put another nested checkpoint folder here. After extraction, this file should sit
+beside config.json and model.safetensors. Optional evaluation metrics can be copied here
+as metrics.json. The running application does not download model weights from the internet.

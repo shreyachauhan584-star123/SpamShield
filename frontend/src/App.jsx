@@ -1,0 +1,965 @@
+/*import { useState } from 'react'
+import heroImg from './assets/hero.png'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import './App.css'
+
+
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <section id="center">
+        <div className="hero">
+          <img src={heroImg} className="base" width="170" height="179" alt="" />
+          <img src={reactLogo} className="framework" alt="React logo" />
+          <img src={viteLogo} className="vite" alt="Vite logo" />
+        </div>
+        <div>
+          <h1>Get started</h1>
+          <p>
+            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+          </p>
+        </div>
+        <button
+          type="button"
+          className="counter"
+          onClick={() => setCount((count) => count + 1)}
+        >
+          Count is {count}
+        </button>
+      </section>
+
+      <div className="ticks"></div>
+
+      <section id="next-steps">
+        <div id="docs">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#documentation-icon"></use>
+          </svg>
+          <h2>Documentation</h2>
+          <p>Your questions, answered</p>
+          <ul>
+            <li>
+              <a href="https://vite.dev/" target="_blank">
+                <img className="logo" src={viteLogo} alt="" />
+                Explore Vite
+              </a>
+            </li>
+            <li>
+              <a href="https://react.dev/" target="_blank">
+                <img className="button-icon" src={reactLogo} alt="" />
+                Learn more
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="social">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#social-icon"></use>
+          </svg>
+          <h2>Connect with us</h2>
+          <p>Join the Vite community</p>
+          <ul>
+            <li>
+              <a href="https://github.com/vitejs/vite" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#github-icon"></use>
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://chat.vite.dev/" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#discord-icon"></use>
+                </svg>
+                Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/vite_js" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#x-icon"></use>
+                </svg>
+                X.com
+              </a>
+            </li>
+            <li>
+              <a href="https://bsky.app/profile/vite.dev" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#bluesky-icon"></use>
+                </svg>
+                Bluesky
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div className="ticks"></div>
+      <section id="spacer"></section>
+    </>
+  )
+}
+
+export default App  */
+
+
+import { useState } from "react";
+import {
+  ShieldCheck,
+  MessageSquare,
+  GraduationCap,
+  Info,
+  Image,
+  Settings,
+  Lock,
+  Menu,
+} from "lucide-react";
+import "./App.css";
+
+function LearnProtectPage() {
+  const [openSection, setOpenSection] = useState("");
+  const [openTopic, setOpenTopic] = useState("");
+    const learningSections = [
+    {
+      id: "welcome",
+      icon: "🛡️",
+      title: "Welcome to Cyber Safety",
+      subtitle: "Build your digital safety awareness",
+      description: "Cyber safety means protecting your personal information, accounts and devices while using the internet.",
+      hindi: "Cyber safety ka matlab hai internet use karte waqt apni personal information, accounts aur devices ko surakshit rakhna.",
+      points: [
+        { en: "Think before clicking links or sharing information.", hi: "Kisi link par click ya information share karne se pehle sochein." },
+        { en: "Use trusted websites and official applications.", hi: "Trusted websites aur official applications ka hi use karein." },
+        { en: "Stay aware of common online fraud techniques.", hi: "Online fraud ke common tareekon ke baare mein jaankari rakhein." }
+      ]
+    },
+    {
+      id: "scams",
+      icon: "🎭",
+      title: "Know Your Scams",
+      subtitle: "Understand common online scams",
+      description: "Scammers may pretend to be banks, delivery companies or familiar organisations to gain your trust.",
+      hindi: "Scammers bank, delivery company ya kisi known organisation ka naam lekar aapka bharosa jeetne ki koshish kar sakte hain.",
+      topics: [
+          {
+          title: "KYC Update Scam",
+          icon: "🏦",
+          en: "A fake message may claim your bank account will be blocked unless you update KYC through a link.",
+          hi: "Fake message mein kaha ja sakta hai ki link se KYC update nahi ki toh bank account block ho jayega.",
+          tip: "Contact your bank through its official app or website.",
+          tipHi: "Bank ki official app ya website se hi sampark karein."
+        },
+        {
+          title: "OTP Scam",
+          icon: "🔐",
+          en: "Someone may pretend to help you and ask you to reveal an OTP.",
+          hi: "Koi madad karne ka bahana banakar aapse OTP maang sakta hai.",
+          tip: "Never share your OTP with anyone.",
+          tipHi: "Apna OTP kisi ke saath share na karein."
+        },
+        {
+          title: "Prize Scam",
+          icon: "🎁",
+          en: "A message may claim that you have won a prize and ask for personal details.",
+          hi: "Message mein prize jeetne ka dawa karke personal details maangi ja sakti hain.",
+          tip: "Verify unexpected prize claims through official sources.",
+          tipHi: "Prize claims ko official sources se verify karein."
+        },
+        {
+          title: "Delivery Scam",
+          icon: "📦",
+          en: "A fake delivery message may ask you to pay a fee or share details.",
+          hi: "Fake delivery message fee ya personal details maang sakta hai.",
+          tip: "Check delivery status through the courier's official website.",
+          tipHi: "Courier ki official website par delivery status check karein."
+        }
+      ]
+    },
+    {
+      id: "red-flags",
+      icon: "🚩",
+      title: "Spot the Red Flags",
+      subtitle: "Learn to recognise suspicious messages",
+      description: "Suspicious messages often use pressure, unexpected requests or unusual links to make you act quickly.",
+      hindi: "Suspicious messages mein jaldi action lene ka pressure, unexpected requests ya unusual links ho sakte hain.",
+      example: "URGENT! Your account will be blocked today. Click this unknown link immediately to verify your details.",
+      redFlags: [
+        {
+          en: "Urgency: The message pressures you to act immediately.",
+          hi: "Jaldi: Message turant action lene ka pressure banata hai."
+        },
+        {
+          en: "Threats: It warns about account closure or penalties.",
+          hi: "Dhamki: Account band hone ya penalty lagne ki warning deta hai."
+        },
+        {
+          en: "Unknown links: The website address looks unfamiliar.",
+          hi: "Unknown link: Website ka address unfamiliar lagta hai."
+        },
+        {
+          en: "Personal information: It unexpectedly asks for passwords or OTPs.",
+          hi: "Personal details: Achanak password ya OTP maangta hai."
+        }
+      ]
+    },
+    {
+      id: "protection",
+      icon: "🔒",
+      title: "Stay Protected",
+      subtitle: "Follow simple habits for safer browsing",
+      description: "Small everyday habits can help protect your digital identity and online accounts.",
+      hindi: "Roz ki kuch simple habits aapki digital identity aur online accounts ko surakshit rakhne mein madad karti hain.",
+      points: [
+        {
+          en: "Never share your OTP, PIN or CVV.",
+          hi: "Apna OTP, PIN ya CVV kabhi share na karein."
+        },
+        {
+          en: "Create strong and unique passwords.",
+          hi: "Strong aur unique passwords banayein."
+        },
+        {
+          en: "Enable two-factor authentication wherever available.",
+          hi: "Jahan available ho, two-factor authentication enable karein."
+        },
+        {
+          en: "Verify messages using official communication channels.",
+          hi: "Messages ko official communication channels se verify karein."
+        },
+        {
+          en: "Report suspected financial fraud through official channels.",
+          hi: "Financial fraud ka shak hone par official channel par report karein."
+        }
+      ]
+    }
+  ];
+
+  const toggleSection = (id) => {
+    setOpenSection(openSection === id ? "" : id);
+    setOpenTopic("");
+  };
+
+  const toggleTopic = (title) => {
+    setOpenTopic(openTopic === title ? "" : title);
+  };
+
+  return (
+    <section className="learn-page">
+      <div className="learn-hero">
+        <span className="learn-eyebrow">LEARN • IDENTIFY • PROTECT</span>
+        <h1>Learn & Protect 🛡️</h1>
+        <p>
+          Welcome to Cyber Safety! Explore common scams, identify warning
+          signs and learn how to stay safe online.
+        </p>
+        
+<p className="learn-hindi">
+  साइबर सुरक्षा में आपका स्वागत है! सामान्य ऑनलाइन धोखाधड़ी को समझें,
+  चेतावनी के संकेत पहचानें और ऑनलाइन सुरक्षित रहना सीखें।
+</p>
+
+      </div>
+
+      <div className="learn-intro">
+        <h2>Your Cyber Safety Learning Hub</h2>
+        <p>
+          Select any learning block below to explore its topics and
+          discover useful safety tips.
+        </p>
+        
+<p className="learn-hindi">
+  किसी भी ब्लॉक पर क्लिक करके उसके विषयों और उपयोगी सुरक्षा सुझावों
+  के बारे में जानें।
+</p>
+
+      </div>
+
+      <div className="learning-blocks">
+        {learningSections.map((section, index) => (
+          <div
+            className={`learning-card ${
+              openSection === section.id ? "expanded" : ""
+            }`}
+            key={section.id}
+          >
+            <button
+              className="learning-card-button"
+              onClick={() => toggleSection(section.id)}
+              aria-expanded={openSection === section.id}
+            >
+              <span className="learning-icon">{section.icon}</span>
+
+              <span className="learning-card-heading">
+                <span className="learning-number">
+                  MODULE 0{index + 1}
+                </span>
+                <strong>{section.title}</strong>
+                <small>{section.subtitle}</small>
+              </span>
+
+              <span className="learning-arrow">
+                {openSection === section.id ? "−" : "+"}
+              </span>
+            </button>
+
+            {openSection === section.id && (
+              <div className="learning-details">
+                <p>{section.description}</p>
+                <p className="learn-hindi">{section.hindi}</p>
+
+                {section.example && (
+                  <div className="red-flag-example">
+                    <strong>Example of a suspicious message</strong>
+                    <p>{section.example}</p>
+                    <small>⚠️ This is an educational example. Do not open suspicious links.</small>
+                  </div>
+                )}
+
+                {section.redFlags && (
+                  <div className="learning-topic-list">
+                    <h3>What are the red flags?</h3>
+                    {section.redFlags.map((item, i) => (
+                      <div className="learning-point" key={i}>
+                        <span>🚩</span>
+                        <div>
+                          <p>{item.en}</p>
+                          <p className="learn-hindi">{item.hi}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {section.topics && (
+                  <div className="learning-topic-list">
+                    <h3>Explore Common Scams</h3>
+
+                    {section.topics.map((topic) => (
+                      <div className="topic-card" key={topic.title}>
+                        <button
+                          className="topic-button"
+                          onClick={() => toggleTopic(topic.title)}
+                          aria-expanded={openTopic === topic.title}
+                        >
+                          <span>{topic.icon} {topic.title}</span>
+                          <span>
+                            {openTopic === topic.title ? "−" : "+"}
+                          </span>
+                        </button>
+
+                        {openTopic === topic.title && (
+                          <div className="topic-details">
+                            <p>{topic.en}</p>
+                            <p className="learn-hindi">{topic.hi}</p>
+
+                            <div className="safety-tip">
+                              <strong>Safety Tip:</strong>
+                              <p>{topic.tip}</p>
+                              <p className="learn-hindi">{topic.tipHi}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {section.points && (
+                  <div className="learning-topic-list">
+                    <h3>Important Things to Remember</h3>
+                    {section.points.map((point, i) => (
+                      <div className="learning-point" key={i}>
+                        <span>✓</span>
+                        <div>
+                          <p>{point.en}</p>
+                          <p className="learn-hindi">{point.hi}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="learn-footer">
+        <h2>Stay Alert. Stay Informed. Stay Protected.</h2>
+        <p>Cyber safety begins with awareness.</p>
+        <p className="learn-hindi">
+          साइबर सुरक्षा की शुरुआत जागरूकता से होती है।
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function App() {
+  const [activePage, setActivePage] = useState("Check an SMS");
+  const [activeMode, setActiveMode] = useState("Paste SMS");
+  const [language, setLanguage] = useState("English");
+  const [textSize, setTextSize] = useState("Normal");
+  const [sms, setSms] = useState("");
+  const [screenshot, setScreenshot] = useState(null);
+
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const navigation = [
+    { name: "Check an SMS", icon: ShieldCheck },
+    { name: "Learn & Protect", icon: GraduationCap },
+    { name: "About", icon: Info },
+  ];
+
+  const handleAnalyze = async () => {
+  if (!sms.trim()) {
+    setError("Please enter an SMS message.");
+    return;
+  }
+
+  setLoading(true);
+  setError("");
+  setResult(null);
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/analyze", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: sms,
+        language_override: null,
+        model_choice: "muril",
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Analysis failed.");
+    }
+
+    setResult(data);
+  } catch (err) {
+    setError(err.message || "Could not connect to the server.");
+  } finally {
+    setLoading(false);
+  }
+};
+const handleScreenshotUpload = async (event) => {
+  const file = event.target.files?.[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    setError("Please upload a valid image.");
+    return;
+  }
+
+  setScreenshot(file);
+  setLoading(true);
+  setError("");
+  setResult(null);
+
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("language", "auto");
+
+    const response = await fetch(
+      "http://127.0.0.1:8000/extract-text",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.detail || "Screenshot text extraction failed.");
+    }
+
+    if (!data.text?.trim()) {
+      throw new Error("No text could be extracted from this screenshot.");
+    }
+
+    setSms(data.text);
+  } catch (err) {
+    setError(err.message || "Could not extract text from screenshot.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+  return (
+    <div className="app-layout">
+
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="brand">
+          <ShieldCheck size={30} />
+          <div>
+            <h2>SpamShield</h2>
+            <span>AI Protection</span>
+          </div>
+        </div>
+
+        <p className="sidebar-label">MENU</p>
+
+        <nav className="navigation">
+          {navigation.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <button
+                key={item.name}
+                className={`nav-item ${
+                  activePage === item.name ? "active" : ""
+                }`}
+                onClick={() => setActivePage(item.name)}
+              >
+                <Icon size={19} />
+                <span>{item.name}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="sidebar-bottom">
+          <div className="settings-heading">
+            <Settings size={17} />
+            <span>Preferences</span>
+          </div>
+
+          <label>Language</label>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          >
+            <option>English</option>
+            <option>हिन्दी</option>
+          </select>
+
+          <label>Text Size</label>
+          <select
+            value={textSize}
+            onChange={(e) => setTextSize(e.target.value)}
+          >
+            <option>Normal</option>
+            <option>Large</option>
+            <option>Extra large</option>
+          </select>
+
+          <div className="privacy-note">
+            <Lock size={16} />
+            <span>Your message is not saved.</span>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="main-content">
+        <header className="topbar">
+          <button className="mobile-menu">
+            <Menu size={22} />
+          </button>
+          <span>SpamShield / {activePage}</span>
+          <div className="status">
+            <span className="status-dot"></span>
+            Your safety matters
+          </div>
+        </header>
+
+        {activePage === "Check an SMS" && (
+          <section className="page-content">
+            <div className="welcome-section">
+              <span className="eyebrow">YOUR DIGITAL SAFETY COMPANION</span>
+              <h1>Stay one step ahead of SMS fraud.</h1>
+              <p>
+                Check suspicious messages and understand potential threats
+                before taking action.
+              </p>
+            </div>
+
+            <h2 className="section-title">How would you like to check?</h2>
+
+            <div className="mode-cards">
+              <button
+                className={`mode-card ${
+                  activeMode === "Paste SMS" ? "selected" : ""
+                }`}
+                onClick={() => setActiveMode("Paste SMS")}
+              >
+                <div className="mode-icon"><MessageSquare /></div>
+                <h3>Paste a message</h3>
+                <p>Copy and paste the SMS you received.</p>
+              </button>
+
+              <button
+                className={`mode-card ${
+                  activeMode === "Screenshot" ? "selected" : ""
+                }`}
+                onClick={() => setActiveMode("Screenshot")}
+              >
+                <div className="mode-icon"><Image /></div>
+                <h3>Upload screenshot</h3>
+                <p>Choose an image of the suspicious message.</p>
+              </button>
+
+              /
+            </div>
+
+            <section className="analysis-panel">
+              <div className="panel-heading">
+                <div>
+                  <h2>{activeMode}</h2>
+                  <p>
+                    {activeMode === "Paste SMS"
+                      ? "Enter the message you want to check."
+                      : activeMode === "Screenshot"
+                      ? "Select a screenshot of your SMS."
+                      : ""}
+                  </p>
+                </div>
+                <ShieldCheck size={25} />
+              </div>
+
+              {activeMode === "Paste SMS" && (
+                <>
+                  <textarea
+                    placeholder="Paste your SMS message here..."
+                    value={sms}
+                    onChange={(e) => setSms(e.target.value)}
+                  />
+                  <div className="panel-actions">
+                    <button
+                      className="clear-button"
+                      onClick={() => setSms("")}
+                    >
+                      Clear
+                    </button>
+                    <button
+                      className="analyze-button"
+                      onClick={handleAnalyze}
+                      disabled={loading}
+                    >
+                    {loading ? "Analyzing..." : "Analyze message"}
+                    </button>
+                  </div>
+                  {error && <p style={{ color: "red" }}>{error}</p>}
+
+
+
+
+
+                </>
+              )}
+
+	      {result && (
+  <div
+    className="result-box"
+    style={{
+      marginTop: "24px",
+      padding: "24px",
+      borderRadius: "16px",
+      background: "#ffffff",
+      border: "1px solid #e2e8f0",
+      boxShadow: "0 6px 20px rgba(15, 23, 42, 0.06)"
+    }}
+  >
+    <h2 style={{ marginBottom: "20px" }}>
+      SMS Analysis Result
+    </h2>
+
+    <div style={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "12px",
+      marginBottom: "22px"
+    }}>
+      <div style={{
+        flex: "1",
+        minWidth: "130px",
+        padding: "16px",
+        borderRadius: "12px",
+        background: "#f8fafc"
+      }}>
+        <p style={{ color: "#64748b", margin: "0 0 8px" }}>
+          Prediction
+        </p>
+        <h3 style={{
+          margin: 0,
+          color: result.ml?.label === "flagged" ? "#dc2626" : "#15803d"
+        }}>
+          {result.ml?.label?.toUpperCase() || "UNAVAILABLE"}
+        </h3>
+      </div>
+
+      <div style={{
+        flex: "1",
+        minWidth: "130px",
+        padding: "16px",
+        borderRadius: "12px",
+        background: "#f8fafc"
+      }}>
+        <p style={{ color: "#64748b", margin: "0 0 8px" }}>
+          Risk Level
+        </p>
+        <h3 style={{
+          margin: 0,
+          color: result.risk?.level === "HIGH"
+            ? "#dc2626"
+            : result.risk?.level === "MEDIUM"
+              ? "#d97706"
+              : "#15803d"
+        }}>
+          {result.risk?.level || "UNAVAILABLE"}
+        </h3>
+      </div>
+    </div>
+    <div style={{ marginBottom: "22px" }}>
+  <h3>Why was it flagged? / इसे संदिग्ध क्यों माना गया?</h3>
+
+  <ul style={{
+  paddingLeft: "22px",
+  lineHeight: "1.8",
+  listStyleType: "disc",
+  listStylePosition: "outside"
+}}>
+    {result.indicators?.length > 0 ? (
+      result.indicators.map((item, index) => (
+        <li key={item.rule_id || index}>
+          {item.explanation?.en || item.matched_text}
+        </li>
+      ))
+    ) : (
+      <li>No suspicious indicators were detected.</li>
+    )}
+  </ul>
+
+  <ul style={{
+    paddingLeft: "22px",
+    lineHeight: "1.8",
+    marginTop: "12px",
+    color: "#64748b",listStyleType: "disc",
+listStylePosition: "outside"
+  }}>
+    {result.indicators?.length > 0 ? (
+      result.indicators.map((item, index) => (
+        <li key={item.rule_id || index}>
+          {item.explanation?.hi || item.matched_text}
+        </li>
+      ))
+    ) : (
+      <li>कोई संदिग्ध संकेत नहीं मिला।</li>
+    )}
+  </ul>
+</div>
+    
+      
+
+    <div style={{
+  padding: "18px",
+  borderRadius: "12px",
+  background: "#f0fdf4",
+  border: "1px solid #bbf7d0",
+  marginBottom: "20px"
+}}>
+  <h3 style={{ marginTop: 0, color: "#166534" }}>
+    Safety Recommendations / सुरक्षा सुझाव
+  </h3>
+
+  {/* English recommendations */}
+  <ul style={{
+    paddingLeft: "22px",
+    lineHeight: "1.8",
+    listStyleType: "disc",
+    listStylePosition: "outside"
+  }}>
+    {result.recommendations?.actions?.map((item, index) => (
+      <li key={`en-${index}`} style={{ marginBottom: "8px" }}>
+        {item.en}
+      </li>
+    ))}
+  </ul>
+
+  {/* Hindi recommendations */}
+  <ul style={{
+    paddingLeft: "22px",
+    lineHeight: "1.8",
+    listStyleType: "disc",
+    listStylePosition: "outside",
+    marginTop: "14px",
+    color: "#475569"
+  }}>
+    {result.recommendations?.actions?.map((item, index) => (
+      <li key={`hi-${index}`} style={{ marginBottom: "8px" }}>
+        {item.hi}
+      </li>
+    ))}
+  </ul>
+</div>
+    <div style={{
+      borderTop: "1px solid #e2e8f0",
+      paddingTop: "14px",
+      color: "#64748b"
+    }}>
+      <strong>AI Model:</strong>{" "}
+      {result.ml?.model_name || "Unavailable"}
+    </div>
+  </div>
+)}
+
+              {activeMode === "Screenshot" && (
+  <>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleScreenshotUpload}
+      disabled={loading}
+    />
+
+    <div className="panel-actions">
+      <button
+        className="clear-button"
+        onClick={() => {
+          setSms("");
+          setScreenshot(null);
+          setResult(null);
+          setError("");
+        }}
+      >
+        Clear
+      </button>
+
+      <button
+        className="analyze-button"
+        onClick={handleAnalyze}
+        disabled={loading || !sms.trim()}
+      >
+        {loading ? "Analyzing..." : "Analyze message"}
+      </button>
+    </div>
+
+    {error && <p style={{ color: "red" }}>{error}</p>}
+  </>
+)}
+              
+            </section>
+          </section>
+        )}
+
+        {activePage === "Learn & Protect" && <LearnProtectPage />}
+
+        {activePage === "About" && (
+  <section className="page-content">
+
+    <div className="welcome-section about-hero">
+      <span className="eyebrow">ABOUT THE PROJECT</span>
+
+      <h1>Protecting people from digital fraud.</h1>
+
+      <p>
+        SpamShield helps users identify suspicious SMS
+        messages and understand potential digital threats.
+      </p>
+
+      <div className="about-quote">
+        <span className="quote-mark"></span>
+        <h2>"Stay One Step Ahead of Digital Scams."</h2>
+        <span className="quote-author">        — SpamShield</span>
+      </div>
+    </div>
+
+    <div className="about-content">
+
+      <div className="analysis-panel">
+        <h2>What is SpamShield?</h2>
+        <p>
+          SpanShield is an intelligent SMS fraud detection
+          platform designed to make digital communication safer.
+          It analyses messages and highlights suspicious patterns
+          that may indicate scams or fraudulent activity.
+        </p>
+      </div>
+
+      <div className="analysis-panel">
+        <div className="about-features">
+  <div className="about-section-heading">
+    <span className="eyebrow">WHAT WE OFFER</span>
+    <h2>Our Key Features</h2>
+    <p>Explore the tools designed to make digital communication safer.</p>
+  </div>
+
+  <div className="feature-grid">
+
+    
+
+  <div className="feature-card">
+    <div className="feature-icon"><ShieldCheck size={25} /></div>
+    <h3>SMS Fraud Detection</h3>
+    <p>Analyse SMS messages and identify potential fraud indicators.</p>
+  </div>
+
+  <div className="feature-card">
+    <div className="feature-icon"><Image size={25} /></div>
+    <h3>Screenshot Text Extraction</h3>
+    <p>Extract message text from screenshots using OCR technology.</p>
+  </div>
+
+  
+
+  <div className="feature-card">
+    <div className="feature-icon"><GraduationCap size={25} /></div>
+    <h3>Fraud Awareness</h3>
+    <p>Explore common digital scams and learn online safety practices.</p>
+  </div>
+
+</div>
+  </div>
+
+      </div>
+
+      <div className="analysis-panel">
+        <h2>Our Mission</h2>
+        <p>
+          Our mission is to promote digital awareness and help
+          people make safer decisions when receiving suspicious
+          messages.
+        </p>
+      </div>
+
+    </div>
+  </section>
+)}
+      </main>
+    </div>
+  );
+}
+
+export default App;

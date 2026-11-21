@@ -1,0 +1,4 @@
+# Optional: transformer fine-tuning/inference (MuRIL / IndicBERT / mBERT). Not needed for the baseline app.
+-r requirements.txt
+torch>=2.2
+transformers>=4.40

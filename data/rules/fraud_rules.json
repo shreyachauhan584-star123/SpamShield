@@ -1,0 +1,425 @@
+{
+  "version": "2.0.0",
+  "notes": "Patterns are conservative and bounded (no unbounded .*). Edit this file to tune rules; no code change needed. 'negatable' rules ignore matches under negation (do not / mat / न). 'actionable' rules keep firing inside fraud-awareness messages.",
+  "rules": [
+    {
+      "id": "R001",
+      "category": "credential_theft",
+      "severity": 3,
+      "patterns": [
+        "(?:share|send|give|tell|provide|forward|reply\\s+with|read\\s+out)\\s+(?:me\\s+|us\\s+)?(?:your\\s+|the\\s+|this\\s+)?(?:otp|one[\\s-]?time\\s+password|cvv|mpin|upi\\s*pin|atm\\s*pin|pin|password)\\b",
+        "(?:otp|pin|cvv|password)\\s+(?:batao|bataiye|bataye|bataen|batayein|bhejo|bhejein|bhej\\s*do|share\\s+karo|share\\s+karein|dijiye)",
+        "(?:ओटीपी|otp|पिन|पासवर्ड|सीवीवी).{0,25}(?:बताएं|बताएँ|बताइए|बताओ|भेजें|भेजिए|साझा\\s*करें|दीजिए)",
+        "(?:otp|pin|cvv|password)\\s+(?:share|send|bata|bhej)\\w*\\s+(?:karo|kro|karein|kijiye|krein|kar\\s*do|do)\\b",
+        "(?:share|send)\\s+(?:karo|kro|karein)\\s+(?:your\\s+)?(?:otp|pin|cvv)",
+        "(?:otp|pin|cvv)\\s+bata\\s+(?:do|dijiye|dena)",
+        "(?:ओटीपी|पिन|सीवीवी|पासवर्ड).{0,15}(?:शेयर\\s*(?:करें|करो)|भेज\\s*दें|बता\\s*दें|बताइए|बताइये)",
+        "(?:एटीएम\\s*)?(?:पिन|ओटीपी)\\s*बताइए"
+      ],
+      "negation_guard": "(?:do\\s*not|don'?t|never|न\\s|नहीं|मत|कभी\\s*न)\\W*(?:\\w+\\W+){0,2}$",
+      "explanation": {
+        "en": "The message asks you to share an OTP, PIN, CVV or password. Real banks and companies never ask for these.",
+        "hi": "संदेश आपसे OTP, पिन, CVV या पासवर्ड माँग रहा है। असली बैंक या कंपनी ये कभी नहीं माँगती।"
+      },
+      "recommendation": {
+        "en": "Never tell anyone your OTP, PIN, CVV or password, even if they say they are from your bank.",
+        "hi": "अपना OTP, पिन, CVV या पासवर्ड किसी को न बताएँ, चाहे वह खुद को बैंक वाला ही क्यों न कहे।"
+      },
+      "negatable": true,
+      "actionable": true
+    },
+    {
+      "id": "R002",
+      "category": "credential_theft",
+      "severity": 2,
+      "patterns": [
+        "(?:enter|update|verify|confirm|submit|share|send)\\s+(?:your\\s+|the\\s+)?(?:atm\\s*pin|upi\\s*pin|card\\s+(?:number|details)|cvv|net\\s?banking\\s+(?:password|details)|aadhaar\\s+(?:number|details)|pan\\s+(?:number|details)|bank\\s+details|account\\s+(?:number|details)|login\\s+details)",
+        "(?:कार्ड|बैंक|खाता)\\s*(?:नंबर|विवरण|डिटेल).{0,20}(?:भेजें|बताएं|बताएँ|दर्ज\\s*करें|अपडेट)"
+      ],
+      "negation_guard": "(?:do\\s*not|don'?t|never|न\\s|नहीं|मत|कभी\\s*न)\\W*(?:\\w+\\W+){0,2}$",
+      "explanation": {
+        "en": "The message asks for card, account, Aadhaar or PAN details.",
+        "hi": "संदेश कार्ड, खाता, आधार या पैन की जानकारी माँग रहा है।"
+      },
+      "recommendation": {
+        "en": "Do not type your card, bank, Aadhaar or PAN details on a link from an SMS. Visit your bank branch or official website yourself.",
+        "hi": "SMS के लिंक पर कार्ड, बैंक, आधार या पैन की जानकारी न भरें। खुद बैंक शाखा जाएँ या आधिकारिक वेबसाइट खोलें।"
+      },
+      "negatable": true,
+      "actionable": true
+    },
+    {
+      "id": "R003",
+      "category": "kyc_scam",
+      "severity": 2,
+      "patterns": [
+        "(?:kyc|केवाईसी).{0,60}(?:updat|expir|pending|incomplete|verif|suspend|block|band|बंद|अपडेट|समाप्त|पूरा|karein|karen|kijiye|immediately|today|turant|तुरंत)",
+        "(?:update|verify|complete|pending|expired?|renew|अपडेट|पूरा).{0,40}(?:kyc|केवाईसी)"
+      ],
+      "suppress_if": "(?:successfully|has\\s+been\\s+(?:updated|verified|completed)|सफलतापूर्वक)",
+      "explanation": {
+        "en": "The message talks about a KYC update with pressure to act. KYC scams are very common.",
+        "hi": "संदेश में KYC अपडेट के नाम पर जल्दी करने का दबाव है। KYC के नाम पर ठगी बहुत होती है।"
+      },
+      "recommendation": {
+        "en": "Do KYC only at your bank branch or in the official bank app. Do not click KYC links in SMS.",
+        "hi": "KYC सिर्फ़ बैंक शाखा में या बैंक के असली ऐप में करें। SMS के KYC लिंक पर क्लिक न करें।"
+      }
+    },
+    {
+      "id": "R004",
+      "category": "account_threat",
+      "severity": 2,
+      "patterns": [
+        "(?:account|a/c|sim|card|wallet|upi).{0,40}(?:will\\s+be|is\\s+going\\s+to\\s+be|shall\\s+be|is\\s+being|to\\s+be)\\s*(?:be\\s+)?(?:blocked|suspended|closed|deactivated|disabled|frozen|terminated|restricted)",
+        "(?:blocked|suspended|closed|deactivated|frozen).{0,20}(?:within|in)\\s+\\d+\\s*(?:hours?|hrs?|days?)",
+        "(?:account|khata|khaata|a/c|sim|card).{0,40}(?:band|block|suspend|deactivate|freeze).{0,25}(?:ho\\s*jayega|ho\\s*jayegi|ho\\s*jaega|kar\\s*diya\\s*jayega|hoga)",
+        "(?:खाता|खाते|अकाउंट|सिम|कार्ड).{0,40}(?:बंद|ब्लॉक|निलंबित|रद्द).{0,30}(?:जाएगा|जायेगा|होगा|जाएगी|वाला|वाली)"
+      ],
+      "explanation": {
+        "en": "The message threatens that your account, SIM or card will be blocked or closed. Scammers use this fear to rush you.",
+        "hi": "संदेश डराता है कि आपका खाता, सिम या कार्ड बंद हो जाएगा। ठग इसी डर से आपको जल्दी में डालते हैं।"
+      },
+      "recommendation": {
+        "en": "Do not panic. Call your bank on the number printed on your card or passbook and ask if there is a real problem.",
+        "hi": "घबराएँ नहीं। अपने कार्ड या पासबुक पर छपे नंबर पर बैंक को फ़ोन करके पूछें कि कोई असली समस्या है या नहीं।"
+      }
+    },
+    {
+      "id": "R005",
+      "category": "urgency",
+      "severity": 1,
+      "patterns": [
+        "\\b(?:immediately|urgent(?:ly)?|right\\s+now|within\\s+\\d+\\s*(?:hours?|hrs?|minutes?|mins?)|last\\s+chance|expires?\\s+today|today\\s+only|act\\s+now|asap)\\b",
+        "\\b(?:turant|jaldi|foran)\\b|\\babhi\\s+(?:karein|click|call)",
+        "(?:तुरंत|जल्दी|फौरन|आज\\s+ही|अभी\\s+(?:करें|क्लिक|कॉल))"
+      ],
+      "explanation": {
+        "en": "The message pushes you to act very quickly. This is common in scams, but also in some genuine reminders.",
+        "hi": "संदेश आपको बहुत जल्दी कुछ करने के लिए कह रहा है। ठगी में ऐसा अक्सर होता है, पर कुछ असली संदेशों में भी होता है।"
+      },
+      "recommendation": {
+        "en": "Take your time. Genuine banks give you time to check.",
+        "hi": "जल्दबाज़ी न करें। असली बैंक जाँचने का समय देते हैं।"
+      }
+    },
+    {
+      "id": "R006",
+      "category": "utility_threat",
+      "severity": 2,
+      "patterns": [
+        "(?:electricity|power|bijli|water|gas)\\b.{0,60}(?:disconnect|cut\\s*off|be\\s+cut|terminated?|will\\s+be\\s+(?:off|stopped))",
+        "(?:disconnect(?:ion|ed)?|cut\\s*off).{0,50}(?:electricity|power|supply|bijli)",
+        "bijli.{0,50}(?:kat|band|disconnect)",
+        "बिजली.{0,60}(?:कट|काट|बंद|विच्छेद|कनेक्शन)"
+      ],
+      "explanation": {
+        "en": "The message threatens to cut your electricity or other utility tonight. This is a well-known scam.",
+        "hi": "संदेश आज रात बिजली या दूसरी सेवा काटने की धमकी दे रहा है। यह जानी-पहचानी ठगी है।"
+      },
+      "recommendation": {
+        "en": "Check your bill on the official electricity board website or at its office. Do not call the number in the message.",
+        "hi": "अपना बिल बिजली बोर्ड की असली वेबसाइट या दफ़्तर में जाँचें। संदेश में दिए नंबर पर कॉल न करें।"
+      }
+    },
+    {
+      "id": "R007",
+      "category": "lottery_prize",
+      "severity": 2,
+      "patterns": [
+        "you\\s+(?:have\\s+)?(?:been\\s+selected|won)\\b|congratulations.{0,60}(?:won|win|prize|winner|selected|lucky)|lottery|lucky\\s+(?:draw|winner|customer)|jackpot|\\bkbc\\b|prize\\s+money|winner\\s+of",
+        "\\binaam\\b|\\binam\\b|lucky\\s+draw|(?:jeet|jeeta|jeete)\\s+(?:gaye|gaya|hai)",
+        "(?:लॉटरी|इनाम|पुरस्कार|विजेता|जीत\\s*(?:लिया|गए|गई)|बधाई.{0,40}(?:जीत|इनाम))"
+      ],
+      "explanation": {
+        "en": "The message says you won a prize or lottery you never entered. Real lotteries do not message winners like this.",
+        "hi": "संदेश कहता है कि आपने इनाम या लॉटरी जीती है, जबकि आपने कोई हिस्सा नहीं लिया। असली लॉटरी ऐसे संदेश नहीं भेजती।"
+      },
+      "recommendation": {
+        "en": "Ignore it. You cannot win a contest you did not enter, and real prizes never need you to pay first.",
+        "hi": "इसे अनदेखा करें। जिसमें आपने हिस्सा नहीं लिया उसमें आप जीत नहीं सकते, और असली इनाम के लिए पहले पैसे नहीं देने पड़ते।"
+      }
+    },
+    {
+      "id": "R008",
+      "category": "lottery_prize",
+      "severity": 2,
+      "patterns": [
+        "(?:claim|redeem|collect|avail)\\s+(?:your\\s+|the\\s+)?(?:reward|cashback|gift|prize|refund|bonus|points|voucher)",
+        "(?:reward|cashback|gift|inaam).{0,20}(?:claim|paane|lene)",
+        "(?:रिवॉर्ड|कैशबैक|इनाम|गिफ्ट|उपहार).{0,30}(?:पाएं|पाएँ|पाने|क्लेम|प्राप्त)",
+        "(?:receive|get|win|earn)\\s+(?:your\\s+|a\\s+|the\\s+)?(?:reward|prize|gift|cashback|bonus)\\b"
+      ],
+      "explanation": {
+        "en": "The message asks you to claim a reward, gift or refund.",
+        "hi": "संदेश आपसे कोई इनाम, उपहार या रिफंड लेने को कह रहा है।"
+      },
+      "recommendation": {
+        "en": "Do not claim rewards through links in SMS. Check offers only in the official app of the company.",
+        "hi": "SMS के लिंक से इनाम न लें। ऑफ़र सिर्फ़ कंपनी के असली ऐप में देखें।"
+      }
+    },
+    {
+      "id": "R009",
+      "category": "advance_fee",
+      "severity": 2,
+      "patterns": [
+        "(?:pay|send|transfer|deposit).{0,50}(?:processing|registration|clearance|release|handling|customs|claim|activation|insurance)\\s+(?:fee|charges?|tax)",
+        "(?:processing|registration|clearance|release|handling|customs|claim|activation)\\s+(?:fee|charges?|tax).{0,50}(?:pay|send|transfer|deposit|to\\s+(?:claim|receive|release))",
+        "(?:processing|registration|claim)\\s*(?:fee|charge).{0,40}(?:bhej|jama|bharein)",
+        "(?:प्रोसेसिंग|रजिस्ट्रेशन|क्लेम|कस्टम)\\s*(?:फीस|शुल्क).{0,40}(?:जमा|भेज|भुगतान)|(?:जमा|भुगतान|भेज).{0,40}(?:प्रोसेसिंग|रजिस्ट्रेशन|क्लेम|कस्टम)\\s*(?:फीस|शुल्क)"
+      ],
+      "explanation": {
+        "en": "The message asks you to pay a fee first to receive money, a prize or a parcel. This is an advance-fee scam pattern.",
+        "hi": "संदेश कहता है कि पैसे, इनाम या पार्सल के लिए पहले फीस भरें। यह ठगी का जाना-पहचाना तरीका है।"
+      },
+      "recommendation": {
+        "en": "Never pay money to receive money. Do not transfer anything.",
+        "hi": "पैसे पाने के लिए कभी पैसे न भेजें। कुछ भी ट्रांसफ़र न करें।"
+      },
+      "actionable": true
+    },
+    {
+      "id": "R011",
+      "category": "fake_government",
+      "severity": 2,
+      "patterns": [
+        "(?:pm[\\s-]?kisan|pradhan\\s+mantri|ayushman|mudra|ujjwala|awas\\s+yojana|subsid(?:y|ies)|yojana|scheme|सब्सिडी|योजना|किसान\\s+सम्मान|आयुष्मान).{0,80}(?:click|link|http|www\\.|apply\\s+now|register\\s+now|update\\s+(?:your\\s+)?(?:bank|aadhaar|details)|share\\s+(?:your\\s+)?(?:bank|aadhaar)|क्लिक|लिंक|आवेदन\\s*करें|बैंक\\s*(?:विवरण|डिटेल))",
+        "(?:click|link|क्लिक|लिंक).{0,60}(?:pm[\\s-]?kisan|subsid(?:y|ies)|yojana|scheme|सब्सिडी|योजना)"
+      ],
+      "suppress_if": "[\\w-]+\\.gov\\.in(?=/|\\s|$|[?#,;)]|\\.(?:\\s|$))",
+      "explanation": {
+        "en": "The message mentions a government scheme or subsidy and asks you to click a link or share details. Fake scheme messages are common.",
+        "hi": "संदेश किसी सरकारी योजना या सब्सिडी का नाम लेकर लिंक खोलने या जानकारी देने को कह रहा है। फ़र्ज़ी योजना के संदेश आम हैं।"
+      },
+      "recommendation": {
+        "en": "Check schemes only on official .gov.in websites, at the panchayat office or your bank branch.",
+        "hi": "योजना की जानकारी सिर्फ़ असली .gov.in वेबसाइट, पंचायत दफ़्तर या बैंक शाखा से लें।"
+      }
+    },
+    {
+      "id": "R012",
+      "category": "upi_fraud",
+      "severity": 3,
+      "patterns": [
+        "upi\\s*pin.{0,50}(?:receive|refund|credit|cashback|get\\s+money|claim)|(?:receive|refund|credit|cashback|claim).{0,50}upi\\s*pin",
+        "(?:scan|open).{0,30}(?:qr|barcode|code).{0,50}(?:receive|refund|credit|get\\s+(?:money|paid))",
+        "(?:collect|payment)\\s+request.{0,50}(?:approve|accept|enter\\s+pin)",
+        "(?:यूपीआई\\s*पिन|upi\\s*pin).{0,40}(?:प्राप्त|पाने|रिफंड|वापस)|(?:रिफंड|वापस|पाने).{0,40}(?:यूपीआई\\s*पिन|upi\\s*pin)",
+        "(?:refund|wapas|paane).{0,40}upi\\s*pin|upi\\s*pin.{0,40}(?:daalein|dalein)"
+      ],
+      "suppress_if": "(?:never|do\\s*not|don'?t)\\s+(?:need|required?|enter|share)",
+      "explanation": {
+        "en": "The message asks for your UPI PIN or a QR scan to RECEIVE money. You never need a PIN or QR scan to receive money.",
+        "hi": "संदेश पैसे पाने के लिए आपका UPI पिन या QR स्कैन माँग रहा है। पैसे पाने के लिए पिन या QR स्कैन की ज़रूरत कभी नहीं होती।"
+      },
+      "recommendation": {
+        "en": "Never enter your UPI PIN to receive money. Decline any unknown payment request.",
+        "hi": "पैसे पाने के लिए UPI पिन कभी न डालें। किसी अनजान भुगतान अनुरोध को मना कर दें।"
+      },
+      "negatable": true,
+      "actionable": true
+    },
+    {
+      "id": "R013",
+      "category": "fake_support",
+      "severity": 1,
+      "patterns": [
+        "(?:call|contact|dial|whatsapp|helpline|customer\\s*(?:care|support))\\b.{0,50}(?:\\+?91[\\s-]?)?[6-9]\\d{9}",
+        "[6-9]\\d{9}.{0,30}(?:call|contact)",
+        "(?:कॉल|संपर्क).{0,40}[6-9]\\d{9}|[6-9]\\d{9}.{0,30}(?:कॉल|संपर्क)",
+        "(?:call|phone|contact)\\s+karein.{0,40}[6-9]\\d{9}"
+      ],
+      "explanation": {
+        "en": "The message gives a mobile number to call. Scammers pose as bank or company support.",
+        "hi": "संदेश में कॉल करने के लिए मोबाइल नंबर दिया है। ठग बैंक या कंपनी के सहायता कर्मी बनकर बात करते हैं।"
+      },
+      "recommendation": {
+        "en": "Use only the helpline number printed on your card, passbook or the official website.",
+        "hi": "सिर्फ़ अपने कार्ड, पासबुक या आधिकारिक वेबसाइट पर छपे हेल्पलाइन नंबर का इस्तेमाल करें।"
+      },
+      "actionable": true
+    },
+    {
+      "id": "R014",
+      "category": "parcel_scam",
+      "severity": 2,
+      "patterns": [
+        "(?:parcel|package|courier|consignment|shipment|delivery|पार्सल|कूरियर).{0,80}(?:held|pending|failed|undelivered|on\\s+hold|incorrect\\s+address|incomplete\\s+address|customs|reschedule|address\\s+(?:update|verification)|रुका|अटका|कस्टम).{0,80}(?:http|www\\.|link|click|pay|fee|क्लिक|लिंक|भुगतान)",
+        "(?:parcel|courier).{0,60}(?:customs|ruka|rok).{0,60}(?:link|click|fee|pay)"
+      ],
+      "explanation": {
+        "en": "The message says a parcel is stuck and asks for a link click or a small fee. Fake delivery messages are common.",
+        "hi": "संदेश कहता है कि पार्सल रुका है और लिंक खोलने या छोटी फीस भरने को कहता है। फ़र्ज़ी डिलीवरी संदेश आम हैं।"
+      },
+      "recommendation": {
+        "en": "Track parcels only in the official courier app or website, or ask the delivery person directly.",
+        "hi": "पार्सल की जानकारी सिर्फ़ कूरियर के असली ऐप या वेबसाइट पर देखें, या डिलीवरी वाले से सीधे पूछें।"
+      }
+    },
+    {
+      "id": "R015",
+      "category": "id_update_scam",
+      "severity": 2,
+      "patterns": [
+        "(?:pan|aadhaar|aadhar|आधार|पैन).{0,40}(?:update|expire[sd]?|block(?:ed)?|suspend(?:ed)?|invalid|deactivat\\w+|अपडेट|रद्द|बंद).{0,60}(?:immediately|today|http|www\\.|link|click|within|तुरंत|क्लिक|लिंक)"
+      ],
+      "suppress_if": "successfully|सफलतापूर्वक",
+      "explanation": {
+        "en": "The message says your Aadhaar or PAN will be blocked or must be updated through a link.",
+        "hi": "संदेश कहता है कि आपका आधार या पैन बंद हो जाएगा या लिंक से अपडेट करना होगा।"
+      },
+      "recommendation": {
+        "en": "Update Aadhaar or PAN only on the official government websites or at an authorised centre.",
+        "hi": "आधार या पैन सिर्फ़ सरकारी वेबसाइट या अधिकृत केंद्र पर अपडेट करें।"
+      }
+    },
+    {
+      "id": "R016",
+      "category": "remote_access",
+      "severity": 3,
+      "patterns": [
+        "\\b(?:anydesk|teamviewer|quick\\s*support|rustdesk|airdroid)\\b"
+      ],
+      "explanation": {
+        "en": "The message mentions a remote-access app. Scammers use these apps to see your screen and take money.",
+        "hi": "संदेश में रिमोट-एक्सेस ऐप का नाम है। ठग इन ऐप से आपकी स्क्रीन देखकर पैसे निकाल लेते हैं।"
+      },
+      "recommendation": {
+        "en": "Never install such apps or share their code because someone asked you to.",
+        "hi": "किसी के कहने पर ऐसे ऐप कभी इंस्टॉल न करें और उनका कोड किसी को न बताएँ।"
+      },
+      "negatable": true,
+      "actionable": true
+    },
+    {
+      "id": "R017",
+      "category": "malicious_app",
+      "severity": 3,
+      "patterns": [
+        "\\.apk\\b"
+      ],
+      "explanation": {
+        "en": "The message links to an APK file, which installs an app outside the Play Store. Banks do not send apps this way.",
+        "hi": "संदेश में APK फ़ाइल का लिंक है, जो Play Store के बाहर से ऐप इंस्टॉल करती है। बैंक ऐसे ऐप नहीं भेजते।"
+      },
+      "recommendation": {
+        "en": "Install apps only from the Google Play Store.",
+        "hi": "ऐप सिर्फ़ Google Play Store से इंस्टॉल करें।"
+      },
+      "actionable": true
+    },
+    {
+      "id": "R018",
+      "category": "investment_job_scam",
+      "severity": 2,
+      "patterns": [
+        "(?:work\\s+from\\s+home|part[\\s-]?time\\s+job).{0,80}(?:earn|salary|income|daily|per\\s+day)",
+        "(?:ghar\\s+baith|ghar\\s+baithe).{0,40}(?:kamai|kamaye)",
+        "घर\\s*बैठे.{0,30}(?:कमाएँ|कमाएं|कमाओ)"
+      ],
+      "explanation": {
+        "en": "The message offers easy money from home or guaranteed returns. These offers are usually scams.",
+        "hi": "संदेश घर बैठे आसान कमाई या पक्के मुनाफ़े का वादा करता है। ऐसे ऑफ़र अक्सर ठगी होते हैं।"
+      },
+      "recommendation": {
+        "en": "Do not send money or personal details. No honest job or investment guarantees quick profit.",
+        "hi": "पैसे या निजी जानकारी न भेजें। कोई ईमानदार नौकरी या निवेश जल्दी मुनाफ़े की गारंटी नहीं देता।"
+      }
+    },
+    {
+      "id": "R019",
+      "category": "loan_scam",
+      "severity": 2,
+      "patterns": [
+        "(?:loan|लोन|कर्ज)\\b.{0,60}(?:approved|sanctioned|pre[\\s-]?approved|manzoor|मंज़ूर|मंजूर|पास).{0,80}(?:fee|fees|charges?|processing|no\\s+documents?|without\\s+documents?|instant|click|link|फीस|शुल्क|बिना\\s*दस्तावेज|bina\\s+document)",
+        "(?:pre[\\s-]?approved|instant|quick|easy)\\s+loan.{0,60}(?:no\\s+(?:documents?|cibil)|without\\s+(?:documents?|cibil)|click|apply\\s+now)"
+      ],
+      "explanation": {
+        "en": "The message offers an instant or pre-approved loan with no documents, often asking for a fee or a link click first. This is a common loan scam.",
+        "hi": "संदेश बिना दस्तावेज़ के तुरंत या पहले से मंज़ूर लोन का लालच देता है और पहले फीस या लिंक पर क्लिक माँगता है। यह लोन ठगी का आम तरीका है।"
+      },
+      "recommendation": {
+        "en": "Apply for loans only at a bank branch or a lender registered with the RBI. Never pay a fee before a loan is paid out.",
+        "hi": "लोन सिर्फ़ बैंक शाखा या RBI से पंजीकृत संस्था से लें। लोन मिलने से पहले कोई फीस कभी न दें।"
+      }
+    },
+    {
+      "id": "R020",
+      "category": "authority_impersonation",
+      "severity": 3,
+      "patterns": [
+        "(?:i\\s+am|this\\s+is|we\\s+are|calling\\s+from|officer\\s+from|from\\s+the)\\s+(?:the\\s+)?(?:rbi|reserve\\s+bank|police|cbi|customs|income\\s+tax|trai|cyber\\s*cell|narcotics|enforcement\\s+directorate).{0,120}(?:arrest|case|fir|warrant|legal\\s+action|penalty|fine|pay|transfer|verify)",
+        "(?:police|cbi|customs|rbi|cyber\\s*cell)\\s+se\\s+bol.{0,100}(?:case|arrest|warrant|paise|fine)",
+        "(?:पुलिस|सीबीआई|आरबीआई|कस्टम|साइबर\\s*सेल).{0,60}(?:से\\s*बोल|की\\s*ओर\\s*से).{0,100}(?:मामला|गिरफ़्तार|गिरफ्तार|वारंट|पैसे|जुर्माना)"
+      ],
+      "explanation": {
+        "en": "The message pretends to come from the police, RBI, customs or another authority and threatens arrest or a case unless you pay or act.",
+        "hi": "संदेश पुलिस, RBI, कस्टम या किसी सरकारी अधिकारी का नाम लेकर गिरफ़्तारी या मामले की धमकी देता है और पैसे या कार्रवाई माँगता है।"
+      },
+      "recommendation": {
+        "en": "Real officers never demand money or OTP by SMS or phone. Do not pay; speak to a family member and call 1930 or your local police station.",
+        "hi": "असली अधिकारी SMS या फ़ोन पर पैसे या OTP नहीं माँगते। पैसे न दें; घर के किसी सदस्य से बात करें और 1930 या अपने थाने में फ़ोन करें।"
+      }
+    },
+    {
+      "id": "R021",
+      "category": "job_scam",
+      "severity": 2,
+      "patterns": [
+        "(?:job\\s+offer|selected\\s+for\\s+(?:the\\s+)?job|appointment\\s+letter|recruitment|vacancy|naukri).{0,100}(?:registration|joining|security|training|processing)\\s*(?:fee|charges?|deposit)",
+        "(?:नौकरी|जॉब|भर्ती).{0,60}(?:पंजीकरण|रजिस्ट्रेशन|जॉइनिंग)\\s*(?:शुल्क|फीस)"
+      ],
+      "explanation": {
+        "en": "The message offers a job but asks you to pay a registration, joining or training fee first.",
+        "hi": "संदेश नौकरी का वादा करता है पर पहले पंजीकरण, जॉइनिंग या ट्रेनिंग फीस माँगता है।"
+      },
+      "recommendation": {
+        "en": "Genuine employers never charge you to give you a job. Do not pay.",
+        "hi": "असली नियोक्ता नौकरी देने के लिए पैसे नहीं लेते। पैसे न दें।"
+      }
+    },
+    {
+      "id": "R022",
+      "category": "investment_scam",
+      "severity": 2,
+      "patterns": [
+        "double\\s+your\\s+(?:money|investment)|guaranteed\\s+returns?|(?:daily|weekly)\\s+profit\\s+guaranteed",
+        "paisa\\s+double|पैसे\\s+(?:दोगुने|डबल)"
+      ],
+      "explanation": {
+        "en": "The message promises to double your money or guarantees returns. No honest investment can promise that.",
+        "hi": "संदेश पैसे दोगुने करने या पक्का मुनाफ़ा देने का वादा करता है। कोई ईमानदार निवेश ऐसा वादा नहीं कर सकता।"
+      },
+      "recommendation": {
+        "en": "Do not invest through unknown messages. Check any scheme with your bank or SEBI-registered advisers.",
+        "hi": "अनजान संदेश से निवेश न करें। किसी भी योजना की जाँच अपने बैंक या SEBI पंजीकृत सलाहकार से करवाएँ।"
+      }
+    }
+  ],
+  "benign_contexts": [
+    {
+      "id": "B001",
+      "requires": "otp|one[\\s-]?time|ओटीपी|verification\\s+code",
+      "patterns": [
+        "(?:do\\s*not|don'?t|never)\\s+(?:share|disclose|tell)|share\\s+(?:it\\s+)?with\\s+no\\s*one|kisi\\s+(?:ko|ke\\s+saath)\\s+(?:na|mat)|share\\s+na\\s+karein|साझा\\s*न\\s*करें|किसी\\s*(?:को|से)\\s*(?:न|ना|मत)"
+      ],
+      "explanation": {
+        "en": "The message contains a code and tells you not to share it. Genuine OTP messages do this.",
+        "hi": "संदेश में कोड है और उसे किसी को न बताने को कहा गया है। असली OTP संदेश ऐसा ही कहते हैं।"
+      }
+    },
+    {
+      "id": "B002",
+      "patterns": [
+        "(?:credited|debited|received|withdrawn|जमा|निकाले|निकासी).{0,60}(?:a/c|acct|account|upi|ref(?:erence)?\\s*(?:no|id)?|txn|खाते|खाता)",
+        "(?:bill|payment|recharge|booking|order).{0,40}(?:paid|successful|successfully|received|confirmed|generated)",
+        "(?:bhar\\s+diya\\s+gaya|jama\\s+hue|jama\\s+ho)|जमा\\s+(?:हो\\s+गया|किए)"
+      ],
+      "explanation": {
+        "en": "The message looks like a notice about something that already happened and does not ask you to do anything risky.",
+        "hi": "संदेश किसी हो चुकी बात की सूचना जैसा है और आपसे कोई जोखिम भरा काम करने को नहीं कहता।"
+      }
+    }
+  ]
+}

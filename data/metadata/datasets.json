@@ -1,0 +1,37 @@
+{
+  "datasets": {
+    "synthetic-demo-v1": {
+      "added_at": "2026-11-07T06:15:41+00:00",
+      "id": "synthetic-demo-v1",
+      "languages": [
+        "en",
+        "hinglish",
+        "hi"
+      ],
+      "license": "Project-authored; licence to be set by the project owner",
+      "license_verified": true,
+      "notes": "149 illustrative messages; not real SMS",
+      "path": "data\\synthetic\\demo_sms_dataset.csv",
+      "provenance": "synthetic",
+      "rows": 149,
+      "sha256": "65f771729b7f4227d173333962f9e116614a9737aeeb0abe2ff03884d6534f35",
+      "source": "Written by the GramSuraksha project author"
+    },
+    "synthetic-hi-hinglish-v2": {
+      "added_at": "2026-11-07T06:15:41+00:00",
+      "id": "synthetic-hi-hinglish-v2",
+      "languages": [
+        "hinglish",
+        "hi"
+      ],
+      "license": "Project-authored; licence to be set by the project owner",
+      "license_verified": true,
+      "notes": "Spelling variants, negation and awareness messages; not real SMS",
+      "path": "data\\synthetic\\hindi_hinglish_synthetic_v2.csv",
+      "provenance": "synthetic",
+      "rows": 56,
+      "sha256": "0964008d2089d457cbfa6abd88d76e0166635174028f3156efb651bb0a187a27",
+      "source": "Written by the GramSuraksha project author"
+    }
+  }
+}
